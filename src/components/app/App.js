@@ -1,9 +1,15 @@
-import './App.css';
+import Circle from "../shapes/Circle";
+import Square from "../shapes/Square";
+import Farm from "../farm/Farm";
 
 function App() {
   return (
     <div className="App">
-Test
+      <Farm>
+        {/* <Circle />
+        <Square /> */}
+        TEST
+      </Farm>
     </div>
   );
 }
