@@ -1,10 +1,10 @@
 import React from 'react';
 import './shapes.css'
 
-const Square = () => {
+const Square = (props) => {
     return (
         <div>
-            <div className='square'></div>
+            <div className='square'>{props.num}</div>
         </div>
     );
 }
