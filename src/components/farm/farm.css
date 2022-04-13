@@ -9,6 +9,9 @@
   background-color: rgb(196, 217, 255);
   height: 100vh;
   display: inline-block;
+  position: absolute;
+  top: 0;
+  z-index: -1;
 }
 .mainTxt{
     text-align: center;
@@ -38,13 +41,4 @@ background-color: rgb(193, 204, 188);
 }
 body{
     margin: 0;
-}
-.cowEnclosure {
-  position: absolute;
-  left: 30px;
-}
-
-.sheepEnclosure{
-  position: absolute;
-  right: 30px;
 }
