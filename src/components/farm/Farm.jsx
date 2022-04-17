@@ -8,30 +8,11 @@ const Farm = () => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-
   const [cows, setCows] = useState([]);
   const [cowsToSheep, setCowsToSheep] = useState([]);
   const [sheep, setSheep] = useState([]);
   const [sheepToCows, setSheepToCows] = useState([]);
-
-  // const [cows, setCows] = useState([
-  //   localStorage.getItem("cows") !== null
-  //     ? JSON.parse(localStorage.getItem("cows"))
-  //     : console.log('not found')
-  // ]);
-  // const [sheep, setSheep] = useState([
-  //   localStorage.getItem("sheep") !== null
-  //     ? JSON.parse(localStorage.getItem("sheep"))
-  //     : null
-  // ]);
-
-  // useEffect(() => {
-  //   localStorage.setItem("cows", JSON.stringify(cows));
-  // }, [cows]);
-
-  // useEffect(() => {
-  //   localStorage.setItem("sheep", JSON.stringify(sheep));
-  // }, [sheep]);
+  const [renderer, setRenderer] = useState("");
 
   const fillAnimals = () => {
     const startingCows = rndNum(5, 20);
@@ -47,38 +28,35 @@ const Farm = () => {
     }
     setSheep([...sheep]);
 
-
     console.log(sheep);
     console.log(cows);
   };
 
-
-
-
-
-
-  const removeSheep = (index, num) => {
-    // console.log("remove: ", index, " num: ", num);
-    sheep.splice(index, 1);
-    sheepToCows.push(num);
-    setSheepToCows(sheepToCows);
-  };
-  const removeCow = (index, num) => {
-    cows.splice(index, 1);
-    cowsToSheep.push(num);
+  const removeCow = (data) => {
+    cows.splice(data.index, 1);
+    cowsToSheep.push(data.num);
     setCowsToSheep(cowsToSheep);
-  };
-  const unmoveSheep = (index, num) => {
-    sheepToCows.splice(index, 1)
-    sheep.push(num)
-    setSheep(sheep)
-  };
-  const unmoveCow = (index, num) => {
-    cowsToSheep.splice(index, 1)
-    cows.push(num)
-    setCows(cows)
+    setRenderer(data);
   };
 
+  const removeSheep = (data) => {
+    sheep.splice(data.index, 1);
+    sheepToCows.push(data.num);
+    setSheepToCows(sheepToCows);
+    setRenderer(data);
+  };
+  const unmoveSheep = (data) => {
+    sheepToCows.splice(data.index, 1);
+    sheep.push(data.num);
+    setSheep(sheep);
+    setRenderer(data);
+  };
+  const unmoveCow = (data) => {
+    cowsToSheep.splice(data.index, 1);
+    cows.push(data.num);
+    setCows(cows);
+    setRenderer(data);
+  };
 
   return (
     <div>
@@ -89,26 +67,34 @@ const Farm = () => {
         </button>
       </div>
 
-
-
       <div className="leftSide">
-        <p className="mainTxt">COWS</p>
+        <p className="mainTxt">
+          COWS: {cows.length}{" "}
+          {sheepToCows.length > 0 && "SHEEP: " + sheepToCows.length}
+        </p>
         <div className="cowEnclosure">
           {cows.map((cow, i) => (
-            <Square key={i} num={cow} index={i} remove={removeCow} />
+            <Square key={i} num={cow} index={i} getData={removeCow} />
           ))}
           {sheepToCows.length > 0 &&
-            sheepToCows.map((shee, i) => <Circle key={i} num={shee} index={i} remove={unmoveSheep} />)}
+            sheepToCows.map((shee, i) => (
+              <Circle key={i} num={shee} index={i} getData={unmoveSheep} />
+            ))}
         </div>
       </div>
       <div className="rightSide">
-        <p className="mainTxt">SHEEP</p>
+        <p className="mainTxt">
+          SHEEP: {sheep.length}{" "}
+          {cowsToSheep.length > 0 && "COWS: " + cowsToSheep.length}
+        </p>
         <div className="sheepEnclosure">
           {sheep.map((shee, i) => (
-            <Circle key={i} num={shee} index={i} remove={removeSheep} />
+            <Circle key={i} num={shee} index={i} getData={removeSheep} />
           ))}
           {cowsToSheep.length > 0 &&
-            cowsToSheep.map((cow, i) => <Square key={i} num={cow} index={i} remove={unmoveCow} />)}
+            cowsToSheep.map((cow, i) => (
+              <Square key={i} num={cow} index={i} getData={unmoveCow} />
+            ))}
         </div>
       </div>
     </div>
