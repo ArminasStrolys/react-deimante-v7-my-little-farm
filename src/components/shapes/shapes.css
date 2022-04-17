@@ -5,6 +5,7 @@
   margin: 20px;
   display: inline-block;
   position: relative;
+  cursor: pointer;
 }
 .circle {
   width: 80px;
@@ -14,6 +15,7 @@
   margin: 20px;
   display: inline-block;
   position: relative;
+  cursor: pointer;
 }
 .centerText {
   position: absolute;
