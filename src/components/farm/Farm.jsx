@@ -12,7 +12,7 @@ const Farm = () => {
   // const [sheep, setSheep] = useState([]);
   // const [cowsToSheep, setCowsToSheep] = useState([]);
   // const [sheepToCows, setSheepToCows] = useState([]);
-  const [renderer, setRenderer] = useState("");
+  // const [renderer, setRenderer] = useState("");
 
   const [cows, setCows] = useState(
     localStorage.getItem("cows") !== null
@@ -62,7 +62,7 @@ const Farm = () => {
     cowsToSheep.push(data.num);
     setCowsToSheep([...cowsToSheep]);
     setCows(cows.splice(data.num));
-    setRenderer(data);
+    // setRenderer(data);
   };
 
   const removeSheep = (data) => {
@@ -70,7 +70,7 @@ const Farm = () => {
     sheepToCows.push(data.num);
     setSheepToCows([...sheepToCows]);
     setSheep(sheep.splice(data.num));
-    setRenderer(data);
+    // setRenderer(data);
   };
 
   const unmoveSheep = (data) => {
@@ -78,7 +78,7 @@ const Farm = () => {
     sheep.push(data.num);
     setSheep(sheep);
     setSheepToCows(sheepToCows.splice(data.num));
-    setRenderer(data);
+    // setRenderer(data);
   };
 
   const unmoveCow = (data) => {
@@ -86,7 +86,7 @@ const Farm = () => {
     cows.push(data.num);
     setCows(cows);
     setCowsToSheep(cowsToSheep.splice(data.num));
-    setRenderer(data);
+    // setRenderer(data);
   };
 
   const reset = () => {
